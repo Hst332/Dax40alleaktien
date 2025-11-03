@@ -30,7 +30,7 @@ jobs:
       - name: Run DAX40 Script
         env:
           TE_API_KEY: ${{ secrets.TE_API_KEY }}
-        run: python dax40_te.py
+        run: python dax40.py
 
       - name: Commit and Push CSV
         run: |
