@@ -1,4 +1,4 @@
-name: Update DAX40 via TradingEconomics
+name: Update DAX40 CSV Daily
 
 on:
   schedule:
@@ -15,9 +15,6 @@ jobs:
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
-        with:
-          persist-credentials: true
-          fetch-depth: 0
 
       - name: Set up Python
         uses: actions/setup-python@v5
@@ -25,11 +22,10 @@ jobs:
           python-version: "3.11"
 
       - name: Install Dependencies
-        run: pip install pandas tradingeconomics
+        run: |
+          pip install pandas numpy yfinance ta
 
-      - name: Run DAX40 Script
-        env:
-          TE_API_KEY: ${{ secrets.TE_API_KEY }}
+      - name: Generate DAX40 CSV
         run: python dax40.py
 
       - name: Commit and Push CSV
