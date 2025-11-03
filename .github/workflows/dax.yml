@@ -22,7 +22,7 @@ jobs:
           python-version: "3.11"
 
       - name: Install Dependencies
-        run: pip install pandas yfinance numpy
+        run: pip install yfinance pandas numpy ta
 
       - name: Generate DAX40 CSV
         run: python dax40.py
@@ -34,4 +34,3 @@ jobs:
           git add -A
           git commit -m "🔁 Update DAX40 CSV ($(date +'%Y-%m-%d'))" || echo "No changes to commit"
           git push
-
