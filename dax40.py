@@ -1,102 +1,86 @@
+import yfinance as yf
 import pandas as pd
-import tradingeconomics as te
-import os
+import numpy as np
 from datetime import datetime
+import ta
 
-# === API-Key ===
-# 👉 Setze deinen API-Key als Umgebungsvariable (lokal oder in GitHub Actions):
-# export TE_API_KEY="dein_api_key"
-API_KEY = os.getenv("TE_API_KEY", "YOUR_API_KEY_HERE")
-te.login(API_KEY)
-
-# === DAX40 Symbole (TradingEconomics Kürzel) ===
-# Format: Firmenname : Kürzel (Yahoo/TE-Format)
-symbols = {
-    "Adidas": "ADS:GR",
-    "Airbus": "AIR:GR",
-    "Allianz": "ALV:GR",
-    "BASF": "BAS:GR",
-    "Bayer": "BAYN:GR",
-    "Beiersdorf": "BEI:GR",
-    "BMW": "BMW:GR",
-    "Brenntag": "BNR:GR",
-    "Commerzbank": "CBK:GR",
-    "Continental": "CON:GR",
-    "Daimler Truck": "DTG:GR",
-    "Deutsche Bank": "DBK:GR",
-    "Deutsche Börse": "DB1:GR",
-    "Deutsche Post": "DPW:GR",
-    "Deutsche Telekom": "DTE:GR",
-    "E.ON": "EOAN:GR",
-    "Fresenius": "FRE:GR",
-    "Fresenius Medical Care": "FME:GR",
-    "GEA": "G1A:GR",
-    "Hannover Rück": "HNR1:GR",
-    "Heidelberg Materials": "HEI:GR",
-    "Henkel": "HEN3:GR",
-    "Infineon": "IFX:GR",
-    "Mercedes-Benz": "MBG:GR",
-    "Merck": "MRK:GR",
-    "MTU Aero Engines": "MTX:GR",
-    "Münchener Rück": "MUV2:GR",
-    "Porsche": "P911:GR",
-    "Qiagen": "QIA:GR",
-    "Rheinmetall": "RHM:GR",
-    "RWE": "RWE:GR",
-    "SAP": "SAP:GR",
-    "Scout24": "G24:GR",
-    "Siemens": "SIE:GR",
-    "Siemens Energy": "ENR:GR",
-    "Siemens Healthineers": "SHL:GR",
-    "Symrise": "SY1:GR",
-    "Volkswagen": "VOW3:GR",
-    "Vonovia": "VNA:GR",
-    "Zalando": "ZAL:GR"
+# DAX40-Ticker (funktionierende Yahoo-Symbole)
+dax40_tickers = {
+    "Adidas": "ADS.DE", "Airbus": "AIR.DE", "Allianz": "ALV.DE", "BASF": "BAS.DE",
+    "Bayer": "BAYN.DE", "Beiersdorf": "BEI.DE", "BMW": "BMW.DE", "Brenntag": "BNR.DE",
+    "Commerzbank": "CBK.DE", "Continental": "CON.DE", "Daimler Truck": "DTG.DE",
+    "Deutsche Bank": "DBK.DE", "Deutsche Börse": "DB1.DE", "Deutsche Post": "DPW.DE",
+    "Deutsche Telekom": "DTE.DE", "E.ON": "EOAN.DE", "Fresenius": "FRE.DE",
+    "Fresenius Medical Care": "FME.DE", "GEA": "G1A.DE", "Hannover Rück": "HNR1.DE",
+    "Heidelberg Materials": "HEI.DE", "Henkel": "HEN3.DE", "Infineon": "IFX.DE",
+    "Mercedes-Benz": "MBG.DE", "Merck": "MRK.DE", "MTU Aero Engines": "MTX.DE",
+    "Münchener Rück": "MUV2.DE", "Porsche": "PAH3.DE", "Qiagen": "QIA.DE",
+    "Rheinmetall": "RHM.DE", "RWE": "RWE.DE", "SAP": "SAP.DE", "Scout24": "S24.DE",
+    "Siemens": "SIE.DE", "Siemens Energy": "ENR.DE", "Siemens Healthineers": "SHL.DE",
+    "Symrise": "SY1.DE", "Volkswagen": "VOW3.DE", "Vonovia": "VNA.DE", "Zalando": "ZAL.DE"
 }
 
-# === Analyse + CSV-Erstellung ===
-rows = []
+results = []
 datum = datetime.now().strftime("%Y-%m-%d")
 
-for name, symbol in symbols.items():
+for name, ticker in dax40_tickers.items():
     try:
-        df = te.getMarketsBySymbol(symbols=symbol, output_type='df')
-        if df is None or df.empty:
+        data = yf.download(ticker, period="1mo", interval="1d", progress=False, auto_adjust=True)
+        if data.empty:
             print(f"⚠️ Keine Daten für {name}")
             continue
 
-        price = df.loc[0, "Last"]
-        change = df.loc[0, "DailyChangePercent"]
+        rsi = ta.momentum.RSIIndicator(data['Close'], window=14).rsi().iloc[-1]
+        change_5d = (data['Close'].iloc[-1] - data['Close'].iloc[-5]) / data['Close'].iloc[-5] * 100
+        change_15d = (data['Close'].iloc[-1] - data['Close'].iloc[-15]) / data['Close'].iloc[-15] * 100
+        returns = data['Close'].pct_change().dropna()
+        volatility = returns.rolling(window=15).std().iloc[-1] * 100
 
-        # Beispiel: Wahrscheinlichkeitsschätzung (simple heuristische Logik)
-        steigt = max(0, min(100, 50 + change * 1.5))
-        fällt = max(0, min(100, 50 - change * 1.5))
-        bleibt = max(0, 100 - (steigt + fällt))
+        def calc_probs(change, rsi):
+            base_up = 50 + change*2 + (rsi-50)/2
+            base_up = max(min(base_up, 90), 10)
+            base_down = 100 - base_up - 10
+            base_stable = 10
+            return round(base_up,1), round(base_stable,1), round(base_down,1)
 
-        diff = abs(steigt - fällt)
+        prob_1_5T_steigt, prob_1_5T_bleibt, prob_1_5T_faellt = calc_probs(change_5d, rsi)
+        prob_2_3W_steigt, prob_2_3W_bleibt, prob_2_3W_faellt = calc_probs(change_15d, rsi)
 
-        rows.append([
+        def label_prob(up, down):
+            if up > down + 10:
+                return "Bullish"
+            elif down > up + 10:
+                return "Bearish"
+            else:
+                return "Seitwärts"
+
+        einschaetzung_1_5T = label_prob(prob_1_5T_steigt, prob_1_5T_faellt)
+        einschaetzung_2_3W = label_prob(prob_2_3W_steigt, prob_2_3W_faellt)
+        diff_1_5 = abs(prob_1_5T_steigt - prob_1_5T_faellt)
+        diff_2_3W = abs(prob_2_3W_steigt - prob_2_3W_faellt)
+
+        results.append([
             name, datum,
-            round(steigt, 1), round(bleibt, 1), round(fällt, 1),
-            "Positiver Trend" if change > 0 else "Negativer Trend" if change < 0 else "Seitwärts",
-            round(change, 2),
-            round(price, 2),
-            round(diff, 1)
+            prob_1_5T_steigt, prob_1_5T_bleibt, prob_1_5T_faellt, einschaetzung_1_5T,
+            prob_2_3W_steigt, prob_2_3W_bleibt, prob_2_3W_faellt, einschaetzung_2_3W,
+            round(rsi,1), round(change_5d,2), round(change_15d,2), round(volatility,2),
+            diff_1_5, diff_2_3W
         ])
 
     except Exception as e:
         print(f"⚠️ Fehler bei {name}: {e}")
 
-# === DataFrame & Speicherung ===
 cols = [
-    "Aktie", "Datum", "1-5T_Steigt", "1-5T_Bleibt", "1-5T_Fällt",
-    "Einschätzung", "Tagesänderung(%)", "Kurs", "Diff_1-5"
+    "Aktie","Datum",
+    "1-5T_Steigt","1-5T_Bleibt","1-5T_Fällt","Einschätzung_1-5T",
+    "2-3W_Steigt","2-3W_Bleibt","2-3W_Fällt","Einschätzung_2-3W",
+    "RSI","5T_Change(%)","15T_Change(%)","Volatilität(%)",
+    "Diff_1-5","Diff_2-3W"
 ]
 
-df_out = pd.DataFrame(rows, columns=cols)
-df_out = df_out.sort_values(by="Diff_1-5", ascending=False)
+df = pd.DataFrame(results, columns=cols)
+df = df.sort_values(by="Diff_1-5", ascending=False)
 
-csv_name = f"dax40_tradingeconomics_{datum}.csv"
-df_out.to_csv(csv_name, index=False)
-
-print(f"✅ Datei erstellt: {csv_name} mit {len(df_out)} Einträgen.")
+csv_name = f"dax40_{datum}.csv"
+df.to_csv(csv_name, index=False)
+print(f"✅ Datei erstellt: {csv_name} mit {len(df)} Einträgen")
