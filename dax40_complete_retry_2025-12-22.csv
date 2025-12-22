@@ -1,0 +1,41 @@
+Aktie,Datum,1-5T_Steigt,1-5T_Bleibt,1-5T_Fällt,Einschätzung_1-5T,2-3W_Steigt,2-3W_Bleibt,2-3W_Fällt,Einschätzung_2-3W,RSI,5T_Change(%),15T_Change(%),Diff_1-5,Diff_2-3W
+Siemens Healthineers,2025-12-22,71.8,15.0,13.2,Kurzfristige Tendenz,71.8,20.0,8.2,Mittelfristige Tendenz,83.6,1.2,4.43,58.6,63.6
+Zalando,2025-12-22,71.3,15.0,13.7,Kurzfristige Tendenz,71.3,20.0,8.7,Mittelfristige Tendenz,82.6,8.27,7.67,57.6,62.6
+Allianz,2025-12-22,67.7,15.0,17.3,Kurzfristige Tendenz,67.7,20.0,12.3,Mittelfristige Tendenz,75.3,1.57,4.71,50.3,55.3
+Continental,2025-12-22,67.0,15.0,18.0,Kurzfristige Tendenz,67.0,20.0,13.0,Mittelfristige Tendenz,74.0,0.81,2.51,49.0,54.0
+Siemens,2025-12-22,66.7,15.0,18.3,Kurzfristige Tendenz,66.7,20.0,13.3,Mittelfristige Tendenz,73.4,1.01,5.54,48.4,53.4
+Deutsche Bank,2025-12-22,65.9,15.0,19.1,Kurzfristige Tendenz,65.9,20.0,14.1,Mittelfristige Tendenz,71.7,3.66,5.94,46.7,51.7
+Siemens Energy,2025-12-22,65.4,15.0,19.6,Kurzfristige Tendenz,65.4,20.0,14.6,Mittelfristige Tendenz,70.7,1.09,4.01,45.7,50.7
+Commerzbank,2025-12-22,65.0,15.0,20.0,Kurzfristige Tendenz,65.0,20.0,15.0,Mittelfristige Tendenz,70.0,3.36,3.18,45.0,50.0
+Bayer,2025-12-22,64.5,15.0,20.5,Kurzfristige Tendenz,64.5,20.0,15.5,Mittelfristige Tendenz,69.0,2.32,5.04,44.0,49.0
+Adidas,2025-12-22,64.3,15.0,20.7,Kurzfristige Tendenz,64.3,20.0,15.7,Mittelfristige Tendenz,68.7,-0.24,4.77,43.7,48.7
+Hannover Rück,2025-12-22,64.0,15.0,21.0,Kurzfristige Tendenz,64.0,20.0,16.0,Mittelfristige Tendenz,67.9,0.69,2.57,42.9,47.9
+Merck,2025-12-22,62.3,15.0,22.7,Kurzfristige Tendenz,62.3,20.0,17.7,Mittelfristige Tendenz,64.7,0.08,2.1,39.7,44.7
+Infineon,2025-12-22,62.3,15.0,22.7,Kurzfristige Tendenz,62.3,20.0,17.7,Mittelfristige Tendenz,64.5,1.93,2.56,39.5,44.5
+MTU Aero Engines,2025-12-22,60.1,15.0,24.9,Kurzfristige Tendenz,60.1,20.0,19.9,Mittelfristige Tendenz,60.2,1.51,4.36,35.2,40.2
+E.ON,2025-12-22,59.4,15.0,25.6,Kurzfristige Tendenz,59.4,20.0,20.6,Mittelfristige Tendenz,58.7,2.34,2.91,33.7,38.7
+Fresenius,2025-12-22,59.0,15.0,26.0,Kurzfristige Tendenz,59.0,20.0,21.0,Mittelfristige Tendenz,58.1,1.33,2.56,33.1,38.1
+RWE,2025-12-22,58.9,15.0,26.1,Kurzfristige Tendenz,58.9,20.0,21.1,Mittelfristige Tendenz,57.8,2.48,1.73,32.8,37.8
+Daimler Truck,2025-12-22,58.1,15.0,26.9,Kurzfristige Tendenz,58.1,20.0,21.9,Mittelfristige Tendenz,56.3,0.37,6.22,31.3,36.3
+SAP,2025-12-22,57.7,15.0,27.3,Kurzfristige Tendenz,57.7,20.0,22.3,Mittelfristige Tendenz,55.4,1.43,0.84,30.4,35.4
+Deutsche Telekom,2025-12-22,57.6,15.0,27.4,Kurzfristige Tendenz,57.6,20.0,22.4,Mittelfristige Tendenz,55.3,2.17,-0.73,30.3,35.3
+Vonovia,2025-12-22,27.7,15.0,57.3,Kurzfristige Tendenz,27.7,20.0,52.3,Mittelfristige Tendenz,15.4,-1.28,-7.01,29.6,24.6
+Deutsche Börse,2025-12-22,55.8,15.0,29.2,Kurzfristige Tendenz,45.8,20.0,34.2,Mittelfristige Tendenz,51.5,2.05,-2.62,26.5,11.5
+Airbus,2025-12-22,54.7,15.0,30.3,Kurzfristige Tendenz,44.7,20.0,35.3,Mittelfristige Tendenz,49.4,1.8,3.04,24.4,9.4
+Symrise,2025-12-22,54.6,15.0,30.4,Kurzfristige Tendenz,44.6,20.0,35.4,Mittelfristige Tendenz,49.1,2.27,-1.38,24.1,9.1
+Münchener Rück,2025-12-22,53.7,15.0,31.3,Kurzfristige Tendenz,63.7,20.0,16.3,Mittelfristige Tendenz,67.5,-0.57,3.05,22.5,47.5
+Porsche,2025-12-22,52.0,15.0,33.0,Kurzfristige Tendenz,62.0,20.0,18.0,Mittelfristige Tendenz,64.0,-2.3,6.14,19.0,44.0
+Heidelberg Materials,2025-12-22,50.4,15.0,34.6,Kurzfristige Tendenz,60.4,20.0,19.6,Mittelfristige Tendenz,60.9,-0.36,2.5,15.9,40.9
+BMW,2025-12-22,50.3,15.0,34.7,Kurzfristige Tendenz,60.3,20.0,19.7,Mittelfristige Tendenz,60.6,-0.45,4.78,15.6,40.6
+Henkel,2025-12-22,50.2,15.0,34.8,Kurzfristige Tendenz,60.2,20.0,19.8,Mittelfristige Tendenz,60.3,-0.11,1.95,15.3,40.3
+Beiersdorf,2025-12-22,49.5,15.0,35.5,Kurzfristige Tendenz,59.5,20.0,20.5,Mittelfristige Tendenz,59.0,-0.26,2.55,14.0,39.0
+Volkswagen,2025-12-22,49.1,15.0,35.9,Kurzfristige Tendenz,59.1,20.0,20.9,Mittelfristige Tendenz,58.1,-2.25,3.06,13.1,38.1
+Qiagen,2025-12-22,47.2,15.0,37.8,Kurzfristige Tendenz,37.2,20.0,42.8,Mittelfristige Tendenz,34.5,1.92,-4.17,9.5,5.5
+Brenntag,2025-12-22,46.4,15.0,38.6,Kurzfristige Tendenz,56.4,20.0,23.6,Mittelfristige Tendenz,52.8,-1.44,1.61,7.8,32.8
+Mercedes-Benz,2025-12-22,46.2,15.0,38.8,Kurzfristige Tendenz,46.2,20.0,33.8,Mittelfristige Tendenz,52.4,-1.06,1.11,7.4,12.4
+Rheinmetall,2025-12-22,46.1,15.0,38.9,Kurzfristige Tendenz,46.1,20.0,33.9,Mittelfristige Tendenz,52.2,-4.08,4.03,7.2,12.2
+BASF,2025-12-22,44.6,15.0,40.4,Kurzfristige Tendenz,44.6,20.0,35.4,Mittelfristige Tendenz,49.2,-0.85,-2.26,4.2,9.2
+Fresenius Medical Care,2025-12-22,42.0,15.0,43.0,Kurzfristige Tendenz,42.0,20.0,38.0,Mittelfristige Tendenz,44.0,0.22,-1.54,1.0,4.0
+Deutsche Post,2025-12-22,33.3,33.3,33.4,Kurzfristige Tendenz,33.3,33.3,33.4,Mittelfristige Tendenz,,,,0.1,0.1
+GEA,2025-12-22,33.3,33.3,33.4,Kurzfristige Tendenz,33.3,33.3,33.4,Mittelfristige Tendenz,,,,0.1,0.1
+Scout24,2025-12-22,33.3,33.3,33.4,Kurzfristige Tendenz,33.3,33.3,33.4,Mittelfristige Tendenz,,,,0.1,0.1
